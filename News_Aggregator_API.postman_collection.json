@@ -1,0 +1,181 @@
+{
+	"info": {
+		"_postman_id": "8d3d5475-3792-49a8-bc5c-d944f8a19aee",
+		"name": "News_Aggregator_API",
+		"description": "Updated Postman collection using jwtToken environment variable correctly",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46098510",
+		"_collection_link": "https://swaraj-6562739.postman.co/workspace/bd10f22b-e75a-4299-8992-b385cfb7b946/collection/46098510-8d3d5475-3792-49a8-bc5c-d944f8a19aee?action=share&source=collection_link&creator=46098510"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"testuser1\",\n  \"password\": \"testpass\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/register",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();",
+							"pm.environment.set(\"jwtToken\", jsonData.token);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"testuser1\",\n  \"password\": \"testpass\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Preferences",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/preferences",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"preferences"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Preferences",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"preferences\": \"technology\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/preferences",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"preferences"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get News",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/news",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"news"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get News keyword search",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/news/search/bitcoin",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"news",
+						"search",
+						"bitcoin"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
